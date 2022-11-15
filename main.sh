@@ -16,7 +16,7 @@ do
 
     read option 
     if [[ $option == "1" ]]; then
-        echo 'y' | sudo pacman -S rxvt-unicode --yes
+        echo 'y' | sudo pacman -S rxvt-unicode
         sudo systemctl start sshd
         ip= ifconfig | grep "inet "|awk '{print $2}'
         echo "You can now SSH. Here are your local IPs"

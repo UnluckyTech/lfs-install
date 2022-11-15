@@ -8,22 +8,27 @@ do
     echo '%%%%%%%%%%%% begin %%%%%%%%%%%%%%'
     echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     echo ''
-    echo '1. Configure VM'
-    echo '2. Check Prerequisites'
-    echo '3. Partition Drive'
+    echo '1. Enter Root'
+    echo '2. Configure VM'
+    echo '3. Check Prerequisites'
+    echo '4. Partition Drive'
 
     read option 
-
     if [[ $option == "1" ]]; then
-        sudo pacman -S rxvt-unicode --yes
+        echo 'root' | passwd
+        su -
+
+    elif [[ $option == "2" ]]; then
+        echo 'y' | sudo pacman -S rxvt-unicode --yes
         sudo systemctl start sshd
         if [ "$EUID" -ne 0 ]
             then echo "Please run as root"
+            
             exit
         fi
-    elif [[ $option == "2" ]]; then 
+    elif [[ $option == "3" ]]; then 
         . prereq.sh
-    elif [[ $option == "3" ]]; then
+    elif [[ $option == "4" ]]; then
     fdisk -l
     else
         2>/dev/null

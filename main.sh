@@ -15,7 +15,7 @@ do
     read option 
 
     if [[ $option == "1" ]]; then
-        sudo pacman -S rxvt-unicode -y
+        sudo pacman -S rxvt-unicode --yes
         sudo systemctl start sshd
         if [ "$EUID" -ne 0 ]
             then echo "Please run as root"

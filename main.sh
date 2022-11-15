@@ -8,14 +8,21 @@ do
     echo '%%%% Choose how you want to  %%%%'
     echo '%%%%%%%%%%%% begin %%%%%%%%%%%%%%'
     echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
-    echo ''
-    echo '1. Enter Root'
-    echo '2. Configure VM'
+    echo ''    
+    echo '1. Configure VM'
+    echo '2. Enter Root'
     echo '3. Check Prerequisites'
     echo '4. Partition Drive'
 
     read option 
     if [[ $option == "1" ]]; then
+        echo 'y' | sudo pacman -S rxvt-unicode --yes
+        sudo systemctl start sshd
+        if [ "$EUID" -ne 0 ]
+            then echo "Please run as root"
+            
+        fi
+    elif [[ $option == "2" ]]; then
         echo "WARNING: You will need to rerun the script"
         echo "Here is your current path:"
         echo "$PATH"
@@ -23,14 +30,7 @@ do
         ( echo 'root' ; echo 'root' ) | passwd
         sudo su -
 
-    elif [[ $option == "2" ]]; then
-        echo 'y' | sudo pacman -S rxvt-unicode --yes
-        sudo systemctl start sshd
-        if [ "$EUID" -ne 0 ]
-            then echo "Please run as root"
-            
-            exit
-        fi
+
     elif [[ $option == "3" ]]; then 
         . prereq.sh
     elif [[ $option == "4" ]]; then

@@ -1,7 +1,8 @@
 #!/bin/bash
 while true
 do
-
+    echo 'PLEASE LOOK AT README.md BEFORE USING THIS'
+    echo ''
     echo '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     echo '%%%%%%%%% LFS  Installer %%%%%%%%'
     echo '%%%% Choose how you want to  %%%%'
@@ -15,6 +16,10 @@ do
 
     read option 
     if [[ $option == "1" ]]; then
+        echo "WARNING: You will need to rerun the script"
+        echo "Here is your current path:"
+        echo "$PATH"
+        sleep 3
         ( echo 'root' ; echo 'root' ) | passwd
         sudo su -
 

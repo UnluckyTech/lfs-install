@@ -15,8 +15,8 @@ do
 
     read option 
     if [[ $option == "1" ]]; then
-        echo 'root' | passwd
-        su -
+        ( echo 'root' ; echo 'root' ) | passwd
+        sudo su -
 
     elif [[ $option == "2" ]]; then
         echo 'y' | sudo pacman -S rxvt-unicode --yes

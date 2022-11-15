@@ -18,6 +18,9 @@ do
     if [[ $option == "1" ]]; then
         echo 'y' | sudo pacman -S rxvt-unicode --yes
         sudo systemctl start sshd
+        ip= ifconfig | grep "inet "|awk '{print $2}'
+        echo "You can now SSH. Here are your local IPs"
+        echo "$ip"
         if [ "$EUID" -ne 0 ]
             then echo "Please run as root"
             

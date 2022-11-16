@@ -13,7 +13,8 @@ do
     echo '2. Enter Root'
     echo '3. Check Prerequisites'
     echo '4. Partition Drive'
-
+    echo '5. Mount Partitions'
+    echo '6. Exit'
     read option 
     if [[ $option == "1" ]]; then
         echo 'y' | sudo pacman -S rxvt-unicode
@@ -49,13 +50,25 @@ do
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"
         ( echo 'n' ; echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'y' ; echo 'w' ) | fdisk "$device"
+        mkfs -v -t ext4 /dev/sda2
+        mkswap /dev/sda1
         fdisk -l
         echo "for drive $device you should see 2 partitions "
         sleep 3
         elif [[ $erase == "n" ]]; then
         echo "Returning to Menu"
         fi
-        
+    elif [[ $option == "5" ]]; then
+        echo "Creating LFS Variable"
+        export LFS=/mnt/lfs
+        echo $LFS
+        echo "Mounting Paritions"
+        mkdir -pv $LFS
+        mount -v -t ext4 /dev/sda2 $LFS
+        /sbin/swapon -v /dev/sda1
+        echo "Everything should be set!"
+    elif [[ $option == "6" ]]; then
+        exit
 
     else
         2>/dev/null

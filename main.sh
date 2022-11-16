@@ -43,9 +43,15 @@ do
         echo "What drive are we working with?"
         read device
         echo "Are you sure you want to format $device ? [y/n]"
-        if [[ $coffee == "y" ]]; then
+        read erase
+        if [[ $erase == "y" ]]; then
         ( echo 'G' ; echo 'w' ) | fdisk "$device"
         echo "Yep its gonee"
+        elif [[ $erase == "n" ]]; then
+        echo "Returning to Menu"
+        fi
+        
+
     else
         2>/dev/null
         echo 'Incorrect command. Try again.'

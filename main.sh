@@ -21,6 +21,8 @@ do
         ip= ifconfig | grep "inet "|awk '{print $2}'
         echo "You can now SSH. Here are your local IPs"
         echo "$ip"
+        echo "ssh -p 2222 liveuser@ip"
+        echo "liveuser pass: root"
         if [ "$EUID" -ne 0 ]
             then echo "Please run as root"
             
@@ -37,7 +39,13 @@ do
     elif [[ $option == "3" ]]; then 
         . prereq.sh
     elif [[ $option == "4" ]]; then
-    fdisk -l
+        fdisk -l
+        echo "What drive are we working with?"
+        read device
+        echo "Are you sure you want to format $device ? [y/n]"
+        if [[ $coffee == "y" ]]; then
+        ( echo 'G' ; echo 'w' ) | fdisk "$device"
+        echo "Yep its gonee"
     else
         2>/dev/null
         echo 'Incorrect command. Try again.'

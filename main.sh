@@ -45,9 +45,10 @@ do
         echo "Are you sure you want to format $device ? [y/n]"
         read erase
         if [[ $erase == "y" ]]; then
-        ( echo 'G' ; echo 'w' ) | fdisk "$device"
+        mkfs.ext4 "$device"
         echo "Will now partition the drive"
-        ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'p' ; echo '2' ; echo '' ; echo '' ; echo 'w' ) | fdisk "$device"
+        ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"
+        ( echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'w' ) | fdisk "$device"
         fdisk -l
         echo "for drive $device you should see 2 partitions "
         sleep 3

@@ -50,8 +50,8 @@ do
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"
         ( echo 'n' ; echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'y' ; echo 'w' ) | fdisk "$device"
-        mkfs -v -t ext4 /dev/sda2
-        mkswap /dev/sda1
+        mkfs -v -t ext4 ${device}2
+        mkswap ${device}1
         fdisk -l
         echo "for drive $device you should see 2 partitions "
         sleep 3
@@ -59,14 +59,27 @@ do
         echo "Returning to Menu"
         fi
     elif [[ $option == "5" ]]; then
-        echo "Creating LFS Variable"
-        export LFS=/mnt/lfs
-        echo $LFS
-        echo "Mounting Paritions"
-        mkdir -pv $LFS
-        mount -v -t ext4 /dev/sda2 $LFS
-        /sbin/swapon -v /dev/sda1
-        echo "Everything should be set!"
+        if [[ -v device ]]; then
+            echo "Creating LFS Variable"
+            export LFS=/mnt/lfs
+            echo $LFS
+            echo "Mounting Paritions"
+            mkdir -pv $LFS
+            mount -v -t ext4 ${device}2 $LFS
+            /sbin/swapon -v ${device}1
+            echo "Everything should be set!"
+        else
+            echo "What drive are we working with?"
+            read device
+            echo "Creating LFS Variable"
+            export LFS=/mnt/lfs
+            echo $LFS
+            echo "Mounting Paritions"
+            mkdir -pv $LFS
+            mount -v -t ext4 ${device}2 $LFS
+            /sbin/swapon -v ${device}1
+            echo "Everything should be set!"
+            
     elif [[ $option == "6" ]]; then
         exit
 

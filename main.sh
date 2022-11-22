@@ -68,6 +68,7 @@ do
             mount -v -t ext4 ${device}2 $LFS
             /sbin/swapon -v ${device}1
             echo "Everything should be set!"
+            sleep 5
         else
             echo "What drive are we working with?"
             read device
@@ -79,6 +80,7 @@ do
             mount -v -t ext4 ${device}2 $LFS
             /sbin/swapon -v ${device}1
             echo "Everything should be set!"
+            sleep 5
         fi
     elif [[ $option == "6" ]]; then
         exit

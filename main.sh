@@ -67,9 +67,8 @@ do
         mount -v -t ext4 /dev/sda2 $LFS
         /sbin/swapon -v /dev/sda1
         echo "export LFS=/mnt/lfs" >> ~/.bashrc
-        echo "You will need to exit this instance"
-        echo "and log back in to make the changes"
-        echo "remain effective."
+        source ~/.bashrc
+        echo "Everything should be set!"
     elif [[ $option == "6" ]]; then
         exit
 

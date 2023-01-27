@@ -15,6 +15,7 @@ do
     echo ''    
     read option 
     if [[ $option == "1" ]]; then
+        sudo pacman -Syy
         echo 'y' | sudo pacman -S rxvt-unicode
         sudo systemctl start sshd
         ip= ifconfig | grep "inet "|awk '{print $2}'

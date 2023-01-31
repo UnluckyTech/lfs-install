@@ -28,14 +28,32 @@ do
             
         fi
     elif [[ $option == "2" ]]; then
-        echo "WARNING: You will need to rerun the script"
-        echo "Here is your current path:"
-        echo "$PATH"
-        sleep 3
-        ( echo 'root' ; echo 'root' ) | passwd
-        sudo su
-        sudo su
-
+        while true
+        do
+            echo ''
+            echo '1. Configure Root'
+            echo '2. Enter Root'
+            echo '3. Return to Prep Script'  
+            echo ''    
+            read input
+            if [[ $input == "1" ]]; then
+                echo "WARNING: You will need to rerun the script"
+                echo "Here is your current path:"
+                echo "$PATH"
+                sleep 3
+                ( echo 'root' ; echo 'root' ) | passwd
+                sudo su
+                sudo su
+            elif [[ $input == "2" ]]; then
+                sudo su
+                sudo su
+            elif [[ $input == "3" ]]; then
+                exit
+            else
+                2>/dev/null
+                echo 'Incorrect command. Try again.'
+            fi
+        done
 
     elif [[ $option == "3" ]]; then 
         . prereq.sh
@@ -46,7 +64,7 @@ do
         echo "Are you sure you want to format $device ? [y/n]"
         read erase
         if [[ $erase == "y" ]]; then
-        fdisk -a $device
+        wipefs -a $device
         mkfs.ext4 "$device"
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"

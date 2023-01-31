@@ -16,7 +16,7 @@ do
     read option 
     if [[ $option == "1" ]]; then
         sudo pacman -Syy
-        echo 'y' | sudo pacman -S rxvt-unicode wipe
+        echo 'y' | sudo pacman -S rxvt-unicode
         sudo systemctl start sshd
         ip= ifconfig | grep "inet "|awk '{print $2}'
         echo "You can now SSH. Here are your local IPs"
@@ -46,8 +46,7 @@ do
         echo "Are you sure you want to format $device ? [y/n]"
         read erase
         if [[ $erase == "y" ]]; then
-        echo "This will take time depending on size."
-        wipe $device
+        fdisk -a $device
         mkfs.ext4 "$device"
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"

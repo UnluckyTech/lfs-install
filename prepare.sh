@@ -34,6 +34,7 @@ do
         sleep 3
         ( echo 'root' ; echo 'root' ) | passwd
         sudo su -
+        sudo su -
 
 
     elif [[ $option == "3" ]]; then 

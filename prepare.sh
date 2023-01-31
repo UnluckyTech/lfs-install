@@ -64,7 +64,8 @@ do
         echo "Are you sure you want to format $device ? [y/n]"
         read erase
         if [[ $erase == "y" ]]; then
-        wipefs -a $device
+        echo "This will take a minute depending on size."
+        shred -n 5 -vz $device
         mkfs.ext4 "$device"
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"
@@ -88,7 +89,7 @@ do
         echo "export LFS=/mnt/lfs" >> ~/.bashrc
         source ~/.bashrc
         echo "You will now exit to save the changes"
-        exit
+        exit 0
         
     elif [[ $option == "6" ]]; then
         . main.sh

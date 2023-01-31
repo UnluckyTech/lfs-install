@@ -12,7 +12,15 @@ chmod +x ./main.sh
 ./main.sh
 ```
 
-# Script Usage
+# Contents
+
+- [Main](#main)
+- [Preparing for the Build](#prepare)
+- [Building LFS Cross Toolchain & Temp Tools](#temptools)
+- [Building the LFS System](#buildlfs)
+- [Documentation](#docs)
+
+
 ```
 
 ```

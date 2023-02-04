@@ -42,11 +42,11 @@ do
                 echo "$PATH"
                 sleep 3
                 ( echo 'root' ; echo 'root' ) | passwd
-                sudo su
-                sudo su
+                su
+                su
             elif [[ $input == "2" ]]; then
-                sudo su
-                sudo su
+                su
+                su
             elif [[ $input == "3" ]]; then
                 exit
             else

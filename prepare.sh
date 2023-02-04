@@ -42,11 +42,11 @@ do
                 echo "$PATH"
                 sleep 3
                 ( echo 'root' ; echo 'root' ) | passwd
-                sudo su
-                sudo su
+                su
+                su
             elif [[ $input == "2" ]]; then
-                sudo su
-                sudo su
+                su
+                su
             elif [[ $input == "3" ]]; then
                 exit
             else
@@ -66,7 +66,7 @@ do
         if [[ $erase == "y" ]]; then
         echo "This will take a minute depending on size."
         shred -n 5 -vz $device
-        mkfs.ext4 "$device"
+        wipefs --all --force $device
         echo "Will now partition the drive"
         ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo '+1G' ; echo 't' ; echo '82' ; echo 'w' ) | fdisk "$device"
         ( echo 'n' ; echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'y' ; echo 'w' ) | fdisk "$device"

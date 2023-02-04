@@ -21,8 +21,8 @@ do
         ip= ifconfig | grep "inet "|awk '{print $2}'
         echo "You can now SSH. Here are your local IPs"
         echo "$ip"
-        echo "ssh -p 2222 liveuser@ip"
-        echo "liveuser pass: root"
+        echo "ssh -p 2222 ${USER}@ip"
+        echo "${USER} pass: root"
         if [ "$EUID" -ne 0 ]
             then echo "Please run as root"
             

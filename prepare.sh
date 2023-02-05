@@ -81,93 +81,31 @@ do
         fi
     elif [[ $option == "5" ]]; then
         if [[ "$device" ]]; then
-            while true
-            do
-                echo ''
-                echo '*********************************'
-                echo '******** Mount Partition ********'
-                echo '*********************************'
-                echo ''    
-                echo '1. Configure Partitions'
-                echo '2. Enter Directory'
-                echo '3. Return to Installer'
-                echo ''
-                read partcom    
-                if [[ $partcom == "1" ]]; then 
-                    echo "Creating LFS Variable"
-                    export LFS=/mnt/lfs
-                    echo $LFS
-                    echo "Mounting Partitions"
-                    mkdir -pv $LFS
-                    mount -v -t ext4 ${device}2 $LFS
-                    /sbin/swapon -v ${device}1
-                    echo "export LFS=/mnt/lfs" >> ~/.bashrc
-                    source ~/.bashrc
-                    echo "You will now exit to save the changes"
-                    exit 0
-                elif [[ $partcom == "2" ]]; then
-                    echo "Creating LFS Variable"
-                    export LFS=/mnt/lfs
-                    echo $LFS
-                    echo "Mounting Partitions"
-                    mkdir -pv $LFS
-                    mount -v -t ext4 ${device}2 $LFS
-                    echo "export LFS=/mnt/lfs" >> ~/.bashrc
-                    source ~/.bashrc
-                    echo "You will now exit to save the changes"
-                    exit 0
-                elif [[ $partcom == "3" ]]; then
-                    exit
-                else
-                    2>/dev/null
-                    echo 'Incorrect command. Try again.'
-                fi
-            done
+            echo "Creating LFS Variable"
+            export LFS=/mnt/lfs
+            echo $LFS
+            echo "Mounting Partitions"
+            mkdir -pv $LFS
+            mount -v -t ext4 ${device}2 $LFS
+            /sbin/swapon -v ${device}1
+            echo "export LFS=/mnt/lfs" >> ~/.bashrc
+            source ~/.bashrc
+            echo "You will now exit to save the changes"
+            exit 0
         else
-            while true
-            do
-                echo "What drive are we working with?"
-                read device
-                echo ''
-                echo '*********************************'
-                echo '******** Mount Partition ********'
-                echo '*********************************'
-                echo ''    
-                echo '1. Configure Partitions'
-                echo '2. Enter Directory'
-                echo '3. Return to Installer'
-                echo ''    
-                read partcom
-                if [[ $partcom == "1" ]]; then 
-                    echo "Creating LFS Variable"
-                    export LFS=/mnt/lfs
-                    echo $LFS
-                    echo "Mounting Partitions"
-                    mkdir -pv $LFS
-                    mount -v -t ext4 ${device}2 $LFS
-                    /sbin/swapon -v ${device}1
-                    echo "export LFS=/mnt/lfs" >> ~/.bashrc
-                    source ~/.bashrc
-                    echo "You will now exit to save the changes"
-                    exit 0
-                elif [[ $partcom == "2" ]]; then
-                    echo "Creating LFS Variable"
-                    export LFS=/mnt/lfs
-                    echo $LFS
-                    echo "Mounting Partitions"
-                    mkdir -pv $LFS
-                    mount -v -t ext4 ${device}2 $LFS
-                    echo "export LFS=/mnt/lfs" >> ~/.bashrc
-                    source ~/.bashrc
-                    echo "You will now exit to save the changes"
-                    exit 0
-                elif [[ $partcom == "3" ]]; then
-                    exit
-                else
-                    2>/dev/null
-                    echo 'Incorrect command. Try again.'
-                fi
-            done
+            echo "What drive are we working with?"
+            read device 
+            echo "Creating LFS Variable"
+            export LFS=/mnt/lfs
+            echo $LFS
+            echo "Mounting Partitions"
+            mkdir -pv $LFS
+            mount -v -t ext4 ${device}2 $LFS
+            /sbin/swapon -v ${device}1
+            echo "export LFS=/mnt/lfs" >> ~/.bashrc
+            source ~/.bashrc
+            echo "You will now exit to save the changes"
+            exit 0
         fi
 
     elif [[ $option == "6" ]]; then

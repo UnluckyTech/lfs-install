@@ -78,8 +78,8 @@ do
                     echo "Adding LFS User"
                     groupadd lfs
                     useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-                    read lfspass
                     echo "Enter lfs password"
+                    read lfspass
                     ( echo $lfspass ; echo $lfspass ) | passwd lfs
                     chown -v lfs $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools}
                     case $(uname -m) in
@@ -119,8 +119,13 @@ EOF
         fi
     else
         echo "LFS variable is not mounted."
-        echo "Return to previous menu to configure."
-        exit
+        echo "Would you like to continue anyways?"
+        read choice
+        if [[ $choice == "y" ]]; then
+            LFS=1
+        else
+            exit
+        fi
     fi
         
 done

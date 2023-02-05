@@ -91,7 +91,8 @@ do
                 echo '1. Configure Partitions'
                 echo '2. Enter Directory'
                 echo '3. Return to Installer'
-                echo ''    
+                echo ''
+                read partcom    
                 if [[ $partcom == "1" ]]; then 
                     echo "Creating LFS Variable"
                     export LFS=/mnt/lfs
@@ -136,6 +137,7 @@ do
                 echo '2. Enter Directory'
                 echo '3. Return to Installer'
                 echo ''    
+                read partcom
                 if [[ $partcom == "1" ]]; then 
                     echo "Creating LFS Variable"
                     export LFS=/mnt/lfs

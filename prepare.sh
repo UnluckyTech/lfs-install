@@ -93,7 +93,7 @@ do
         exit 0
         
     elif [[ $option == "6" ]]; then
-        . main.sh
+        exit
 
     else
         2>/dev/null

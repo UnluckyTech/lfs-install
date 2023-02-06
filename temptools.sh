@@ -105,6 +105,8 @@ EOF
                     CONFIG_SITE=$LFS/usr/share/config.site
                     export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
 EOF
+                elif [[ $finalprep == "3" ]]; then
+                    exit
                 fi
             done
         elif [[ $option == "3" ]]; then 
@@ -119,10 +121,10 @@ EOF
         fi
     else
         echo "LFS variable is not mounted."
-        echo "Would you like to continue anyways?"
+        echo "Would you like to mount it now?"
         read choice
         if [[ $choice == "y" ]]; then
-            LFS=1
+            LFS=/mnt/lfs
         else
             exit
         fi

@@ -251,11 +251,11 @@ EOF
                     sleep 1
                     
                 elif [[ $temp == "2" ]]; then
-
+                    echo "nuh"
                 elif [[ $temp == "3" ]]; then
-                
+                    echo "nuh"
                 elif [[ $temp == "4" ]]; then
-                
+                    echo "nuh"
                 elif [[ $temp == "5" ]]; then
                     exit
                 fi

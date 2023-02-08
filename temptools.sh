@@ -320,7 +320,7 @@ EOF
                     mv -v $LFS/usr/share/man/man1/chroot.1 $LFS/usr/share/man/man8/chroot.8
                     sed -i 's/"1"/"8"/'                    $LFS/usr/share/man/man8/chroot.8
                     cd $LFS/sources
-                    rm -rf coreutils-9.1.tar.xz
+                    rm -rf coreutils-9.1
                     echo "Installing Diffutils (5/17)"
                     sleep 1
                     tar -xvf diffutils-3.8.tar.xz

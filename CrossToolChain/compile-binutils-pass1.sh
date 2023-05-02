@@ -4,12 +4,12 @@
 # and save such into the dir variable.
 cd $LFS/sources
 pkg=$(find . -maxdepth 1 -type f -name "binutils*" | head -n 1)
-dir=$(find . -maxdepth 1 -type d -name "binutils*" | head -n 1)
 
 if [ -z "$pkg" ]; then
     echo "Error: No directories matching 'binutils*' found"
 else
     tar -xvf ${pkg}
+    dir=$(find . -maxdepth 1 -type d -name "binutils*" | head -n 1)
     cd $dir
     mkdir -v build
     cd build

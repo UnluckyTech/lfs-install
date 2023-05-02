@@ -2,13 +2,14 @@
 
 # Search for files whose name matches "binutils*"
 # and save such into the dir variable.
-dir=$(find . -maxdepth 1 -type f -name "binutils*" | head -n 1)
+cd $LFS/sources
+pkg=$(find . -maxdepth 1 -type f -name "binutils*" | head -n 1)
+dir=$(find . -maxdepth 1 -type d -name "binutils*" | head -n 1)
 
-if [ -z "$dir" ]; then
-    echo "Error: No directories matching 'folder*' found"
+if [ -z "$pkg" ]; then
+    echo "Error: No directories matching 'binutils*' found"
 else
-    cd $LFS/sources
-    tar -xvf ${dir}.tar.xz
+    tar -xvf ${pkg}
     cd $dir
     mkdir -v build
     cd build
@@ -31,11 +32,13 @@ fi
 
 # Search for directories whose name matches "binutils*"
 # and save such into the dir variable
+cd $LFS/sources
 dir=$(find . -maxdepth 1 -type d -name "binutils*" | head -n 1)
 
 if [ -z "$dir" ]; then
-    echo "Error: No directories matching 'folder*' found"
+    echo "Error: No directories matching 'binutils*' found"
 else
-    cd $LFS/sources
     rm -rf $dir
 fi
+ls 
+sleep 5

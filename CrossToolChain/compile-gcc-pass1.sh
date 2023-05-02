@@ -2,20 +2,27 @@
 
 # Search for files whose name matches "gcc*"
 # and save such into the dir variable.
-dir=$(find . -maxdepth 1 -type f -name "gcc*" | head -n 1)
+cd $LFS/sources
+pkg=$(find . -maxdepth 1 -type f -name "gcc*" | head -n 1)
 
-if [ -z "$dir" ]; then
+if [ -z "$pkg" ]; then
     echo "Error: No directories matching 'gcc*' found"
 else
-    cd $LFS/sources
-    tar -xvf ${dir}.tar.xz
+    tar -xvf $pkg
+    dir=$(find . -maxdepth 1 -type d -name "gcc*" | head -n 1)
     cd $dir
-    tar -xf ../mpfr-4.1.0.tar.xz
-    mv -v mpfr-4.1.0 mpfr
-    tar -xf ../gmp-6.2.1.tar.xz
-    mv -v gmp-6.2.1 gmp
-    tar -xf ../mpc-1.2.1.tar.gz
-    mv -v mpc-1.2.1 mpc
+    mpfr=$(find . -maxdepth 1 -type f -name "mpfr*" | head -n 1)
+    gmp=$(find . -maxdepth 1 -type f -name "gmp*" | head -n 1)
+    mpc=$(find . -maxdepth 1 -type f -name "mpc*" | head -n 1)
+    tar -xf ../${mpfr}
+    mpfrd=$(find . -maxdepth 1 -type d -name "mpfr*" | head -n 1)
+    mv -v $mpfrd mpfr
+    tar -xf ../${gmp}
+    gmpd=$(find . -maxdepth 1 -type d -name "gmp*" | head -n 1)
+    mv -v $gmpd gmp
+    tar -xf ../${mpc}
+    mpcd=$(find . -maxdepth 1 -type d -name "mpc*" | head -n 1)
+    mv -v $mpcd mpc
     case $(uname -m) in
         x86_64)
             sed -e '/m64=/s/lib64/lib/' \
@@ -45,6 +52,12 @@ else
         --enable-languages=c,c++
     make
     make install
+    if [ $? -eq 0 ]; then
+        echo "Package compiled successfully"
+    else
+        echo "Error: Package compilation failed"
+        sleep 5
+    fi
     cd ..
     cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
         `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
@@ -53,11 +66,11 @@ fi
 
 # Search for directories whose name matches "gcc*"
 # and save such into the dir variable
+cd $LFS/sources
 dir=$(find . -maxdepth 1 -type d -name "gcc*" | head -n 1)
 
 if [ -z "$dir" ]; then
     echo "Error: No directories matching 'gcc*' found"
 else
-    cd $LFS/sources
     rm -rf $dir
 fi

@@ -8,7 +8,7 @@ pkg=$(find . -maxdepth 1 -type f -name "binutils*" | head -n 1)
 if [ -z "$pkg" ]; then
     echo "Error: No directories matching 'binutils*' found"
 else
-    tar -xvf ${pkg}
+    tar -xvf $pkg
     dir=$(find . -maxdepth 1 -type d -name "binutils*" | head -n 1)
     cd $dir
     mkdir -v build

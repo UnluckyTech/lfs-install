@@ -2,13 +2,14 @@
 
 # Search for files whose name matches "glibc*"
 # and save such into the dir variable.
-dir=$(find . -maxdepth 1 -type f -name "glibc*" | head -n 1)
+cd $LFS/sources
+pkg=$(find . -maxdepth 1 -type f -name "glibc*" | head -n 1)
 
-if [ -z "$dir" ]; then
+if [ -z "$pkg" ]; then
     echo "Error: No directories matching 'glibc*' found"
 else
-    cd $LFS/sources
-    tar -xvf ${dir}.tar.xz
+    tar -xvf $pkg
+    dir=$(find . -maxdepth 1 -type d -name "glibc*" | head -n 1)
     cd $dir
     case $(uname -m) in
         i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
@@ -42,11 +43,11 @@ fi
 
 # Search for directories whose name matches "glibc*"
 # and save such into the dir variable
+cd $LFS/sources
 dir=$(find . -maxdepth 1 -type d -name "glibc*" | head -n 1)
 
 if [ -z "$dir" ]; then
     echo "Error: No directories matching 'glibc*' found"
 else
-    cd $LFS/sources
     rm -rf $dir
 fi

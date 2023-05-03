@@ -145,144 +145,34 @@ EOF
                 elif [[ $temp == "2" ]]; then
                     echo "Installing M4 (1/17)"
                     sleep 1
-                    cd $LFS/sources
-                    tar -xvf m4-1.4.19.tar.xz
-                    cd m4-1.4.19
-                    ./configure --prefix=/usr   \
-                                --host=$LFS_TGT \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf m4-1.4.19
+                    . /home/$user/lfs-install/CrossToolChain/compile-m4.sh
                     echo "Installing Ncurses (2/17)"
                     sleep 1
-                    tar -xvf ncurses-6.3.tar.gz
-                    cd ncurses-6.3
-                    sed -i s/mawk// configure
-                    mkdir build
-                    pushd build
-                        ../configure
-                        make -C include
-                        make -C progs tic
-                    popd
-                    ./configure --prefix=/usr                \
-                                --host=$LFS_TGT              \
-                                --build=$(./config.guess)    \
-                                --mandir=/usr/share/man      \
-                                --with-manpage-format=normal \
-                                --with-shared                \
-                                --without-normal             \
-                                --with-cxx-shared            \
-                                --without-debug              \
-                                --without-ada                \
-                                --disable-stripping          \
-                                --enable-widec
-                    make
-                    make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
-                    echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
-                    cd $LFS/sources
-                    rm -rf ncurses-6.3
+                    . /home/$user/lfs-install/CrossToolChain/compile-ncurses.sh
                     echo " Installing Bash (3/17)"
                     sleep 1
-                    tar -xvf bash-5.1.16.tar.gz
-                    cd bash-5.1.16
-                    ./configure --prefix=/usr                   \
-                                --build=$(support/config.guess) \
-                                --host=$LFS_TGT                 \
-                                --without-bash-malloc
-                    make
-                    make DESTDIR=$LFS install
-                    ln -sv bash $LFS/bin/sh
-                    cd $LFS/sources
-                    rm -rf bash-5.1.16
+                    . /home/$user/lfs-install/CrossToolChain/compile-bash.sh
                     echo "Installing Coreutils (4/17)"
                     sleep 1
-                    tar -xvf coreutils-9.1.tar.xz
-                    cd coreutils-9.1
-                    ./configure --prefix=/usr                     \
-                                --host=$LFS_TGT                   \
-                                --build=$(build-aux/config.guess) \
-                                --enable-install-program=hostname \
-                                --enable-no-install-program=kill,uptime
-                    make
-                    make DESTDIR=$LFS install
-                    mv -v $LFS/usr/bin/chroot              $LFS/usr/sbin
-                    mkdir -pv $LFS/usr/share/man/man8
-                    mv -v $LFS/usr/share/man/man1/chroot.1 $LFS/usr/share/man/man8/chroot.8
-                    sed -i 's/"1"/"8"/'                    $LFS/usr/share/man/man8/chroot.8
-                    cd $LFS/sources
-                    rm -rf coreutils-9.1
+                    . /home/$user/lfs-install/CrossToolChain/compile-coreutils.sh
                     echo "Installing Diffutils (5/17)"
                     sleep 1
-                    tar -xvf diffutils-3.8.tar.xz
-                    cd diffutils-3.8
-                    ./configure --prefix=/usr --host=$LFS_TGT
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf diffutils-3.8
+                    . /home/$user/lfs-install/CrossToolChain/compile-coreutils.sh
                     echo "Installing File (6/17)"
                     sleep 1
-                    tar -xvf file-5.42.tar.gz
-                    cd file-5.42
-                    mkdir build
-                    pushd build
-                        ../configure --disable-bzlib      \
-                                     --disable-libseccomp \
-                                     --disable-xzlib      \
-                                     --disable-zlib
-                        make
-                    popd
-                    ./configure --prefix=/usr --host=$LFS_TGT --build=$(./config.guess)
-                    make FILE_COMPILE=$(pwd)/build/src/file
-                    make DESTDIR=$LFS install
-                    rm -v $LFS/usr/lib/libmagic.la
-                    cd $LFS/sources
-                    rm -rf file-5.42
+                    . /home/$user/lfs-install/CrossToolChain/compile-file.sh
                     echo "Installing Findutils (7/17)"
                     sleep 1
-                    tar -xvf findutils-4.9.0.tar.xz
-                    cd findutils-4.9.0
-                    ./configure --prefix=/usr                   \
-                                --localstatedir=/var/lib/locate \
-                                --host=$LFS_TGT                 \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf findutils-4.9.0
+                    . /home/$user/lfs-install/CrossToolChain/compile-findutils.sh
                     echo "Installing Gawk (8/17)"
                     sleep 1
-                    tar -xvf gawk-5.1.1.tar.xz
-                    cd gawk-5.1.1
-                    sed -i 's/extras//' Makefile.in
-                    ./configure --prefix=/usr   \
-                                --host=$LFS_TGT \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf gawk-5.1.1
+                    . /home/$user/lfs-install/CrossToolChain/compile-gawk.sh
                     echo "Installing Grep (9/17)"
                     sleep 1
-                    tar -xvf grep-3.7.tar.xz
-                    cd grep-3.7
-                    ./configure --prefix=/usr   \
-                                --host=$LFS_TGT
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf grep-3.7
+                    . /home/$user/lfs-install/CrossToolChain/compile-grep.sh
                     echo "Installing Gzip (10/17)"
                     sleep 1
-                    tar -xvf gzip-1.12.tar.xz
-                    cd gzip-1.12
-                    ./configure --prefix=/usr --host=$LFS_TGT
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf gzip-1.12
+                    . /home/$user/lfs-install/CrossToolChain/compile-gzip.sh
                     echo "Installing Make (11/17)"
                     sleep 1
                     tar -xvf make-4.3.tar.gz

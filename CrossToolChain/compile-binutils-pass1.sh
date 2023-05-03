@@ -40,5 +40,3 @@ if [ -z "$dir" ]; then
 else
     rm -rf $dir
 fi
-ls 
-sleep 5

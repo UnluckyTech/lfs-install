@@ -126,19 +126,19 @@ EOF
                 if [[ $temp == "1" ]]; then
                     echo "Installing Binutils (1/5)"
                     sleep 1
-                    . /home/$user/CrossToolChain/compile-binutils-pass1.sh
+                    . /home/$user/lfs-install/CrossToolChain/compile-binutils-pass1.sh
                     echo "Installing GCC (2/5)"
                     sleep 1
-                    . /home/$user/CrossToolChain/compile-gcc-pass1.sh
+                    . /home/$user/lfs-install/CrossToolChain/compile-gcc-pass1.sh
                     echo "Installing Linux API Headers (3/5)"
                     sleep 1
-                    . /home/$user/CrossToolChain/compile-linux-api-headers.sh
+                    . /home/$user/lfs-install/CrossToolChain/compile-linux-api-headers.sh
                     echo "Installing Glibc (4/5)"
                     sleep 1
-                    . /home/$user/CrossToolChain/compile-glibc.sh
+                    . /home/$user/lfs-install/CrossToolChain/compile-glibc.sh
                     echo "Installing GCC (5/5)"
                     sleep 1
-                    . /home/$user/CrossToolChain/compile-libstdc-gcc.sh
+                    . /home/$user/lfs-install/CrossToolChain/compile-libstdc-gcc.sh
                     echo "Installation Completed"
                     sleep 1
                     

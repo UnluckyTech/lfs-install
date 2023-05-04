@@ -10,6 +10,7 @@ do
         echo '3. Build Cross/Temp Tools'
         echo '4. Cross Compile Tools'
         echo '5. Return to Installer'
+        user="$(whoami)"
         read option
         if [[ $option == "1" ]]; then
             while true
@@ -44,6 +45,7 @@ do
                     echo "Once Completed run the validation once again."
                     echo "https://www.linuxfromscratch.org/lfs/view/stable/chapter03/packages.html"
                 elif [[ $tpack == "3" ]]; then
+                    . /home/$user/lfs-install/temptools.sh
                     exit
                 else
                     2>/dev/null
@@ -61,6 +63,7 @@ do
                 echo '1. Configure LFS User'
                 echo '2. Set Up Environment'
                 echo '3. Return to TempTools'
+                user="$(whoami)"
                 read finalprep
                 if [[ $finalprep == "1" ]]; then
                     echo "Creating Required Directories"
@@ -106,6 +109,7 @@ EOF
                     export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
 EOF
                 elif [[ $finalprep == "3" ]]; then
+                    . /home/$user/lfs-install/temptools.sh
                     exit
                 fi
             done
@@ -124,23 +128,7 @@ EOF
                 user="$(whoami)"
                 read temp
                 if [[ $temp == "1" ]]; then
-                    echo "Installing Binutils (1/5)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-binutils-pass1.sh
-                    echo "Installing GCC (2/5)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-gcc-pass1.sh
-                    echo "Installing Linux API Headers (3/5)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-linux-api-headers.sh
-                    echo "Installing Glibc (4/5)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-glibc.sh
-                    echo "Installing GCC (5/5)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-libstdc-gcc.sh
-                    echo "Installation Completed"
-                    sleep 1
+                    . /home/$user/lfs-install/CrossToolChain/tcindex.sh
                     
                 elif [[ $temp == "2" ]]; then
                     echo "Installing M4 (1/17)"
@@ -206,6 +194,7 @@ EOF
                     echo '4. Build Additional Temp Tools'
                     echo '5. Clean and Backup Temp System'
                     echo '6. Return to TempTools'
+                    user="$(whoami)"
                     read inpchr
                     if [[ $inpchr == "1" ]]; then
                         echo "Changing Ownership"
@@ -391,6 +380,7 @@ EOF
                         tar -cJpf $HOME/lfs-temp-tools-11.2.tar.xz .
                         echo "Back Up Completed."
                     elif [[ $inpchr == "6" ]]; then
+                        . /home/$user/lfs-install/temptools.sh
                         exit
                     fi
 
@@ -398,13 +388,14 @@ EOF
                 elif [[ $temp == "4" ]]; then
                     echo "nuh"
                 elif [[ $temp == "5" ]]; then
+                    . /home/$user/lfs-install/temptools.sh
                     exit
                 fi
             done
         elif [[ $option == "4" ]]; then
             echo 'nuh'
         elif [[ $option == "5" ]]; then
-            exit
+            . /home/$user/lfs-install/main.sh
         else
             2>/dev/null
             echo 'Incorrect command. Try again.'

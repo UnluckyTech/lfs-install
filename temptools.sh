@@ -145,154 +145,55 @@ EOF
                 elif [[ $temp == "2" ]]; then
                     echo "Installing M4 (1/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-m4.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-m4.sh
                     echo "Installing Ncurses (2/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-ncurses.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-ncurses.sh
                     echo " Installing Bash (3/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-bash.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-bash.sh
                     echo "Installing Coreutils (4/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-coreutils.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-coreutils.sh
                     echo "Installing Diffutils (5/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-coreutils.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-coreutils.sh
                     echo "Installing File (6/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-file.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-file.sh
                     echo "Installing Findutils (7/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-findutils.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-findutils.sh
                     echo "Installing Gawk (8/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-gawk.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-gawk.sh
                     echo "Installing Grep (9/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-grep.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-grep.sh
                     echo "Installing Gzip (10/17)"
                     sleep 1
-                    . /home/$user/lfs-install/CrossToolChain/compile-gzip.sh
+                    . /home/$user/lfs-install/CrossTempTools/compile-gzip.sh
                     echo "Installing Make (11/17)"
                     sleep 1
-                    tar -xvf make-4.3.tar.gz
-                    cd make-4.3
-                    ./configure --prefix=/usr   \
-                                --without-guile \
-                                --host=$LFS_TGT \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf make-4.3
+                    . /home/$user/lfs-install/CrossTempTools/compile-make.sh
                     echo "Installing Patch (12/17)"
                     sleep 1
-                    tar -xvf patch-2.7.6.tar.xz
-                    cd patch-2.7.6
-                    ./configure --prefix=/usr   \
-                                --host=$LFS_TGT \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf patch-2.7.6
+                    . /home/$user/lfs-install/CrossTempTools/compile-patch.sh
                     echo "Installing Sed (13/17)"
                     sleep 1
-                    tar -xvf sed-4.8.tar.xz
-                    cd sed-4.8
-                    ./configure --prefix=/usr   \
-                                --host=$LFS_TGT
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf sed-4.8
+                    . /home/$user/lfs-install/CrossTempTools/compile-sed.sh
                     echo "Installing Tar (14/17)"
                     sleep 1
-                    tar -xvf tar-1.34.tar.xz
-                    cd tar-1.34
-                    ./configure --prefix=/usr                     \
-                                --host=$LFS_TGT                   \
-                                --build=$(build-aux/config.guess)
-                    make
-                    make DESTDIR=$LFS install
-                    cd $LFS/sources
-                    rm -rf tar-1.34
+                    . /home/$user/lfs-install/CrossTempTools/compile-tar.sh
                     echo "Installing Xz (15/17)"
                     sleep 1
-                    tar -xvf xz-5.2.6.tar.xz
-                    cd xz-5.2.6
-                    ./configure --prefix=/usr                     \
-                                --host=$LFS_TGT                   \
-                                --build=$(build-aux/config.guess) \
-                                --disable-static                  \
-                                --docdir=/usr/share/doc/xz-5.2.6
-                    make
-                    make DESTDIR=$LFS install
-                    rm -v $LFS/usr/lib/liblzma.la
-                    cd $LFS/sources
-                    rm -rf xz-5.2.6
+                    . /home/$user/lfs-install/CrossTempTools/compile-xz.sh
                     echo "Installing Binutils pt2 (16/17)"
                     sleep 1
-                    tar -xvf binutils-2.39.tar.xz
-                    cd binutils-2.39
-                    sed '6009s/$add_dir//' -i ltmain.sh
-                    mkdir -v build
-                    cd build
-                    ../configure                   \
-                        --prefix=/usr              \
-                        --build=$(../config.guess) \
-                        --host=$LFS_TGT            \
-                        --disable-nls              \
-                        --enable-shared            \
-                        --enable-gprofng=no        \
-                        --disable-werror           \
-                        --enable-64-bit-bfd
-                    make
-                    make DESTDIR=$LFS install
-                    rm -v $LFS/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.{a,la}
-                    cd $LFS/sources
-                    rm -rf binutils-2.39
+                    . /home/$user/lfs-install/CrossTempTools/compile-binutils-pass2.sh
                     echo "Installing GCC pt2 (17/17)"
                     sleep 1
-                    tar -xvf gcc-12.2.0.tar.xz
-                    cd gcc-12.2.0
-                    tar -xf ../mpfr-4.1.0.tar.xz
-                    mv -v mpfr-4.1.0 mpfr
-                    tar -xf ../gmp-6.2.1.tar.xz
-                    mv -v gmp-6.2.1 gmp
-                    tar -xf ../mpc-1.2.1.tar.gz
-                    mv -v mpc-1.2.1 mpc
-                    case $(uname -m) in
-                        x86_64)
-                            sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
-                        ;;
-                    esac
-                    sed '/thread_header =/s/@.*@/gthr-posix.h/' \
-                    -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
-                    mkdir -v build
-                    cd build
-                    ../configure                                       \
-                        --build=$(../config.guess)                     \
-                        --host=$LFS_TGT                                \
-                        --target=$LFS_TGT                              \
-                        LDFLAGS_FOR_TARGET=-L$PWD/$LFS_TGT/libgcc      \
-                        --prefix=/usr                                  \
-                        --with-build-sysroot=$LFS                      \
-                        --enable-initfini-array                        \
-                        --disable-nls                                  \
-                        --disable-multilib                             \
-                        --disable-decimal-float                        \
-                        --disable-libatomic                            \
-                        --disable-libgomp                              \
-                        --disable-libquadmath                          \
-                        --disable-libssp                               \
-                        --disable-libvtv                               \
-                        --enable-languages=c,c++
-                    make
-                    make DESTDIR=$LFS install
-                    ln -sv gcc $LFS/usr/bin/cc
-                    cd $LFS/sources
-                    rm -rf gcc-12.2.0
+                    . /home/$user/lfs-install/CrossTempTools/compile-gcc-pass2.sh
                     echo "Installation Completed"
                 elif [[ $temp == "3" ]]; then
                     echo ''

@@ -22,12 +22,6 @@ else
     mkdir -pv $LFS/usr/share/man/man8
     mv -v $LFS/usr/share/man/man1/chroot.1 $LFS/usr/share/man/man8/chroot.8
     sed -i 's/"1"/"8"/'                    $LFS/usr/share/man/man8/chroot.8
-    if [ $? -eq 0 ]; then
-        echo "Package compiled successfully"
-    else
-        echo "Error: Package compilation failed"
-        sleep 5
-    fi
 fi
 
 # Search for directories whose name matches "coreutils*"

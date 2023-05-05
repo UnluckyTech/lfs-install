@@ -131,57 +131,7 @@ EOF
                     . /home/$user/lfs-install/CrossToolChain/tcindex.sh
                     
                 elif [[ $temp == "2" ]]; then
-                    echo "Installing M4 (1/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-m4.sh
-                    echo "Installing Ncurses (2/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-ncurses.sh
-                    echo " Installing Bash (3/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-bash.sh
-                    echo "Installing Coreutils (4/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-coreutils.sh
-                    echo "Installing Diffutils (5/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-coreutils.sh
-                    echo "Installing File (6/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-file.sh
-                    echo "Installing Findutils (7/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-findutils.sh
-                    echo "Installing Gawk (8/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-gawk.sh
-                    echo "Installing Grep (9/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-grep.sh
-                    echo "Installing Gzip (10/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-gzip.sh
-                    echo "Installing Make (11/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-make.sh
-                    echo "Installing Patch (12/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-patch.sh
-                    echo "Installing Sed (13/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-sed.sh
-                    echo "Installing Tar (14/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-tar.sh
-                    echo "Installing Xz (15/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-xz.sh
-                    echo "Installing Binutils pt2 (16/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-binutils-pass2.sh
-                    echo "Installing GCC pt2 (17/17)"
-                    sleep 1
-                    . /home/$user/lfs-install/CrossTempTools/compile-gcc-pass2.sh
+                    . /home/$user/lfs-install/CrossTempTools/ttindex.sh
                     echo "Installation Completed"
                 elif [[ $temp == "3" ]]; then
                     echo ''

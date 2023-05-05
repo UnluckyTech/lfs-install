@@ -52,12 +52,6 @@ else
         --enable-languages=c,c++
     make
     make install
-    if [ $? -eq 0 ]; then
-        echo "Package compiled successfully"
-    else
-        echo "Error: Package compilation failed"
-        sleep 5
-    fi
     cd ..
     cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
         `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h

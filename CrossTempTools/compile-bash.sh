@@ -18,12 +18,6 @@ else
     make
     make DESTDIR=$LFS install
     ln -sv bash $LFS/bin/sh
-    if [ $? -eq 0 ]; then
-        echo "Package compiled successfully"
-    else
-        echo "Error: Package compilation failed"
-        sleep 5
-    fi
 fi
 
 # Search for directories whose name matches "bash*"

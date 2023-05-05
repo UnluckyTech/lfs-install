@@ -163,6 +163,8 @@ EOF
                             mount -vt tmpfs tmpfs $LFS/run
                             if [ -h $LFS/dev/shm ]; then
                                 mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+                            else
+                                mount -t tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm
                             fi
                         elif [[ $inpchr == "2" ]]; then
                             chroot "$LFS" /usr/bin/env -i   \

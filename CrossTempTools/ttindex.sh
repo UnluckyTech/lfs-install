@@ -5,12 +5,12 @@ packages=("m4" "ncurses" "bash" "coreutils" "diffutils" "file" "findutils" "gawk
 
 # Initialize compilation status for each package
 declare -A status
-for package in "${pack]}"; do
+for package in "${packages[@]}"; do
     status[$package]=0
 done
 
 # Compile each package using its compilation script and update compilation status
-for package in "${pack]}"; do
+for package in "${packages[@]}"; do
     echo "Compiling $package"
     case $package in
         "m4")
@@ -115,7 +115,7 @@ done
 
 # Report which packages failed to compile
 echo "Summary:"
-for package in "${pack]}"; do
+for package in "${packages[@]}"; do
     if [ ${status[$package]} -eq 0 ]; then
         echo "$package compiled successfully"
     else

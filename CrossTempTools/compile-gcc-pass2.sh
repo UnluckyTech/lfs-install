@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Search for files whose name matches "temp*"
+# Search for files whose name matches "gcc*"
 # and save such into the pkg variable.
 cd $LFS/sources
-pkg=$(find . -maxdepth 1 -type f -name "temp*" | head -n 1)
+pkg=$(find . -maxdepth 1 -type f -name "gcc*" | head -n 1)
 
 if [ -z "$pkg" ]; then
-    echo "Error: No directories matching 'temp*' found"
+    echo "Error: No directories matching 'gcc*' found"
 else
     tar -xvf $pkg
-    dir=$(find . -maxdepth 1 -type d -name "temp*" | head -n 1)
+    dir=$(find . -maxdepth 1 -type d -name "gcc*" | head -n 1)
     cd $dir
     mpfr=$(find . -maxdepth 1 -type f -name "mpfr*" | head -n 1)
     gmp=$(find . -maxdepth 1 -type f -name "gmp*" | head -n 1)
@@ -54,13 +54,13 @@ else
     ln -sv gcc $LFS/usr/bin/cc
 fi
 
-# Search for directories whose name matches "temp*"
+# Search for directories whose name matches "gcc*"
 # and save such into the dir variable
 cd $LFS/sources
-dir=$(find . -maxdepth 1 -type d -name "temp*" | head -n 1)
+dir=$(find . -maxdepth 1 -type d -name "gcc*" | head -n 1)
 
 if [ -z "$dir" ]; then
-    echo "Error: No directories matching 'temp*' found"
+    echo "Error: No directories matching 'gcc*' found"
 else
     rm -rf $dir
 fi

@@ -58,26 +58,31 @@ do
     elif [[ $option == "3" ]]; then 
         . prereq.sh
     elif [[ $option == "4" ]]; then
-        fdisk -l
-        echo "What drive are we working with?"
-        read device
-        echo "Are you sure you want to format $device ? [y/n]"
-        read erase
-        if [[ $erase == "y" ]]; then
-        echo "This will take a minute depending on size."
-        mkfs.ext4 $device
-        wipefs --all --force $device
-        echo "How much storage in GB would you like on swap?"
-        read swapgb
-        echo "Will now partition the drive"
-        ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo "+${swapgb}G" ; echo 't' ; echo '82' ; echo 'n' ; echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'w' ) | fdisk "$device"
-        mkfs -v -t ext4 ${device}2
-        mkswap ${device}1
-        fdisk -l
-        echo "for drive $device you should see 2 partitions "
-        sleep 3
-        elif [[ $erase == "n" ]]; then
-        echo "Returning to Menu"
+        if [ $(whoami) == "root" ]; then
+            fdisk -l
+            echo "What drive are we working with?"
+            read device
+            echo "Are you sure you want to format $device ? [y/n]"
+            read erase
+            if [[ $erase == "y" ]]; then
+                echo "This will take a minute depending on size."
+                mkfs.ext4 $device
+                wipefs --all --force $device
+                echo "How much storage in GB would you like on swap?"
+                read swapgb
+                echo "Will now partition the drive"
+                ( echo 'n' ; echo 'p' ; echo '1' ; echo '2048' ; echo "+${swapgb}G" ; echo 't' ; echo '82' ; echo 'n' ; echo 'p' ; echo '2' ; echo ' ' ; echo ' ' ; echo 'w' ) | fdisk "$device"
+                mkfs -v -t ext4 ${device}2
+                mkswap ${device}1
+                fdisk -l
+                echo "for drive $device you should see 2 partitions "
+                sleep 3
+            elif [[ $erase == "n" ]]; then
+                echo "Returning to Menu"
+            fi
+        else
+            echo "You need to be root to run this script."
+            exit 1
         fi
     elif [[ $option == "5" ]]; then
         if [[ "$device" ]]; then

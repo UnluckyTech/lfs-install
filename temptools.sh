@@ -108,6 +108,10 @@ EOF
                     CONFIG_SITE=$LFS/usr/share/config.site
                     export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
 EOF
+                    echo "How many cores we are using?"
+                    read core
+                    echo "export MAKEFLAGS='-j$core'" >> ~/.bashrc
+                    source ~/.bash_profile
                 elif [[ $finalprep == "3" ]]; then
                     . /home/$user/lfs-install/temptools.sh
                     exit

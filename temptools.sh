@@ -107,11 +107,7 @@ EOF
                     PATH=$LFS/tools/bin:$PATH
                     CONFIG_SITE=$LFS/usr/share/config.site
                     export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
-EOF 
-                    echo "How many cores we are using?"
-                    read core
-                    echo "export MAKEFLAGS='-j$core'" >> ~/.bashrc
-                    source ~/.bash_profile
+EOF
                 elif [[ $finalprep == "3" ]]; then
                     . /home/$user/lfs-install/temptools.sh
                     exit
@@ -167,8 +163,6 @@ EOF
                             mount -vt tmpfs tmpfs $LFS/run
                             if [ -h $LFS/dev/shm ]; then
                                 mkdir -pv $LFS/$(readlink $LFS/dev/shm)
-                            else
-                                mount -t tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm
                             fi
                         elif [[ $inpchr == "2" ]]; then
                             chroot "$LFS" /usr/bin/env -i   \

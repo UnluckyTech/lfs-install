@@ -11,6 +11,9 @@ else
     tar -xvf $pkg
     dir=$(find . -maxdepth 1 -type d -name "make*" | head -n 1)
     cd $dir
+    sed -e '/ifdef SIGPIPE/,+2 d' \
+        -e '/undef  FATAL_SIG/i FATAL_SIG (SIGPIPE);' \
+        -i src/main.c
     ./configure --prefix=/usr   \
                 --without-guile \
                 --host=$LFS_TGT \

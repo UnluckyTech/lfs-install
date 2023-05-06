@@ -12,7 +12,7 @@ else
     dir=$(find . -maxdepth 1 -type d -name "bash*" | head -n 1)
     cd $dir
     ./configure --prefix=/usr                   \
-                --build=$(support/config.guess) \
+                --build=$(sh support/config.guess) \
                 --host=$LFS_TGT                 \
                 --without-bash-malloc
     make

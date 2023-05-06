@@ -18,7 +18,7 @@ else
                 ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
         ;;
     esac
-    patch -Np1 -i ../glibc-2.36-fhs-1.patch
+    patch -Np1 -i ../${dir}-fhs-1.patch
     mkdir -v build
     cd build
     echo "rootsbindir=/usr/sbin" > configparms

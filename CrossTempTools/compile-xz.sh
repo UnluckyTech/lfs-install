@@ -15,9 +15,10 @@ else
                 --host=$LFS_TGT                   \
                 --build=$(build-aux/config.guess) \
                 --disable-static                  \
-                --docdir=/usr/share/doc/xz-5.2.6
+                --docdir=/usr/share/doc/$dir
     make
     make DESTDIR=$LFS install
+    rm -v $LFS/usr/lib/liblzma.la
 fi
 
 # Search for directories whose name matches "xz*"

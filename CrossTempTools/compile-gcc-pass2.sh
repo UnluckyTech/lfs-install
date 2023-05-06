@@ -29,7 +29,7 @@ else
         ;;
     esac
     sed '/thread_header =/s/@.*@/gthr-posix.h/' \
-    -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
+        -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
     mkdir -v build
     cd build
     ../configure                                       \
@@ -39,10 +39,10 @@ else
         LDFLAGS_FOR_TARGET=-L$PWD/$LFS_TGT/libgcc      \
         --prefix=/usr                                  \
         --with-build-sysroot=$LFS                      \
-        --enable-initfini-array                        \
+        --enable-default-pie                           \
+        --enable-default-ssp                           \
         --disable-nls                                  \
         --disable-multilib                             \
-        --disable-decimal-float                        \
         --disable-libatomic                            \
         --disable-libgomp                              \
         --disable-libquadmath                          \

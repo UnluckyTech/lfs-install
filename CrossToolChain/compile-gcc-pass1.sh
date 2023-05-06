@@ -34,14 +34,15 @@ else
     ../configure                  \
         --target=$LFS_TGT         \
         --prefix=$LFS/tools       \
-        --with-glibc-version=2.36 \
+        --with-glibc-version=2.37 \
         --with-sysroot=$LFS       \
         --with-newlib             \
         --without-headers         \
+        --enable-default-pie      \
+        --enable-default-ssp      \
         --disable-nls             \
         --disable-shared          \
         --disable-multilib        \
-        --disable-decimal-float   \
         --disable-threads         \
         --disable-libatomic       \
         --disable-libgomp         \
@@ -55,7 +56,6 @@ else
     cd ..
     cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
         `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
-
 fi
 
 # Search for directories whose name matches "gcc*"

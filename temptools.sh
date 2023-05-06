@@ -344,6 +344,7 @@ EOF
                             2>/dev/null
                             echo 'Incorrect command. Try again.'
                         fi
+                    fi
                     else
                         echo "You need to be root to run this script."
                         exit 1

@@ -340,11 +340,14 @@ EOF
                         elif [[ $inpchr == "6" ]]; then
                             . /home/$user/lfs-install/temptools.sh
                             exit
+                        else
+                            2>/dev/null
+                            echo 'Incorrect command. Try again.'
+                        fi
+                    else
+                        echo "You need to be root to run this script."
+                        exit 1
                     fi
-                else
-                    echo "You need to be root to run this script."
-                    exit 1
-                fi
 
                 elif [[ $temp == "4" ]]; then
                     echo "nuh"

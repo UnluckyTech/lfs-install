@@ -1,6 +1,7 @@
 #!/bin/bash
 while true
 do
+    user="$(whoami)"
     echo ''
     echo '*********************************'
     echo '******** LFS  Prep Script *******'

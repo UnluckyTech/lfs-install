@@ -50,7 +50,7 @@ do
                 sudo su
                 sudo su
             elif [[ $input == "3" ]]; then
-                exit
+                return
             else
                 2>/dev/null
                 echo 'Incorrect command. Try again.'

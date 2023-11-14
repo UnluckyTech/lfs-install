@@ -116,7 +116,7 @@ do
         fi
 
     elif [[ $option == "6" ]]; then
-        exit
+        return
 
     else
         2>/dev/null

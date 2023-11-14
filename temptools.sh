@@ -46,8 +46,8 @@ do
                     echo "Once Completed run the validation once again."
                     echo "https://www.linuxfromscratch.org/lfs/view/stable/chapter03/packages.html"
                 elif [[ $tpack == "3" ]]; then
-                    . /home/$user/lfs-install/temptools.sh
-                    exit
+                     . /home/$user/lfs-install/temptools.sh
+                    return
                 else
                     2>/dev/null
                     echo 'Incorrect command. Try again.'
@@ -115,8 +115,8 @@ EOF
                     echo "export MAKEFLAGS='-j$core'" >> ~/.bashrc
                     source ~/.bash_profile
                 elif [[ $finalprep == "3" ]]; then
-                    . /home/$user/lfs-install/temptools.sh
-                    exit
+                     . /home/$user/lfs-install/temptools.sh
+                    return
                 fi
             done
         elif [[ $option == "3" ]]; then 
@@ -350,7 +350,7 @@ EOF
                     echo "nuh"
                 elif [[ $temp == "5" ]]; then
                     . /home/$user/lfs-install/temptools.sh
-                    exit
+                    return
                 fi
             done
         elif [[ $option == "4" ]]; then
@@ -368,7 +368,7 @@ EOF
         if [[ $choice == "y" ]]; then
             LFS=/mnt/lfs
         else
-            exit
+            return
         fi
     fi
         

@@ -21,7 +21,7 @@ do
     elif [[ $option == "4" ]]; then
         echo 'nuh'
     elif [[ $option == "5" ]]; then
-        exit
+        return
     else
         2>/dev/null
         echo 'Incorrect command. Try again.'

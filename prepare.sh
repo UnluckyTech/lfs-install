@@ -37,6 +37,7 @@ do
             echo ''    
             read input
             if [[ $input == "1" ]]; then
+                cp -rf /home/$user/lfs-install /home/root/
                 echo "WARNING: You will need to rerun the script"
                 echo "Here is your current path:"
                 echo "$PATH"

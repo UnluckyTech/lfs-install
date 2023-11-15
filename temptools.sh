@@ -114,10 +114,10 @@ EOF
                     read core
                     echo "export MAKEFLAGS='-j$core'" >> ~/.bashrc
                     source ~/.bash_profile
-                    return
                 elif [[ $finalprep == "3" ]]; then
                      . /home/$user/lfs-install/temptools.sh
-                    return
+                else
+                    echo "Invalid option. Please enter 1, 2, or 3."
                 fi
             done
         elif [[ $option == "3" ]]; then 

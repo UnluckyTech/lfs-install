@@ -114,6 +114,7 @@ EOF
                     read core
                     echo "export MAKEFLAGS='-j$core'" >> ~/.bashrc
                     source ~/.bash_profile
+                    . /home/$user/lfs-install/temptools.sh
                 elif [[ $finalprep == "3" ]]; then
                      . /home/$user/lfs-install/temptools.sh
                 else

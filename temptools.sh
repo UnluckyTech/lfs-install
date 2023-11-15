@@ -89,7 +89,6 @@ do
                     case $(uname -m) in
                     x86_64) chown -v lfs $LFS/lib64 ;;
                     esac
-                    sudo mkdir /home/lfs/lfs-install/
                     sudo cp -rf /home/$user/lfs-install /home/lfs/lfs-install
                     echo "You will now log into lfs"
                     su - lfs
